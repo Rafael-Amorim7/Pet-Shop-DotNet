@@ -1,0 +1,85 @@
+@model PetShopApp.Models.Proprietario
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Proprietario</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cpf)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cpf)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DtNascimento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DtNascimento)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Animais</h4>
+
+    <ul>
+        @foreach (var animal in Model.Animais){
+            <li>
+                @Html.DisplayFor(model => animal.Nome)
+            </li>
+            <li>
+                @{
+                    int age = DateTime.Now.Year - animal.DtNascimento.Year;
+                    if (DateTime.Now.Month < animal.DtNascimento.Month || (DateTime.Now.Month == animal.DtNascimento.Month && DateTime.Now.Day < animal.DtNascimento.Day))
+                        age--;
+                }
+                @Html.DisplayFor(model => age)
+            </li>
+            <li>
+                @Html.DisplayFor(model => animal.Raca)
+            </li>
+            <li>
+                @Html.DisplayFor(model => animal.Porte)
+            </li>
+            <li>
+                @Html.DisplayFor(model => animal.Sexo)
+            </li>
+            <li>
+                @Html.DisplayFor(model => animal.Especie)
+            </li>
+        }
+    </ul>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
